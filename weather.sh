@@ -43,7 +43,7 @@ fn_get_weather() {
 		do
 			# Eventually jq gives us two values. These are assigned to timestamp and forecast variables
 			# --argjson is required to keep jq from passing a string as an index (which it doesn't allow)
-			read -r timestamp forecast <<< $(curl --silent https://api.darksky.net/forecast/<put your api key here>/$ip_location?exclude=currently,minutely,hourly,alerts,flags | jq --argjson jq_index $index '.daily.data[$jq_index] | "\(.time) \(.summary)"')
+			read -r timestamp forecast <<< $(curl --silent https://api.darksky.net/forecast/7375b943962f1f61b85fdb007cdd1133/$ip_location?exclude=currently,minutely,hourly,alerts,flags | jq --argjson jq_index $index '.daily.data[$jq_index] | "\(.time) \(.summary)"')
 
 			# Some variable formatting to strip off extra quotation marks which break the date command
 			current_epoch=$(echo $timestamp | cut -d '"' -f2)
